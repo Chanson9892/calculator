@@ -8,7 +8,13 @@ body {
     padding: 0;
     margin: 0;
     background:burlywood;
+    overflow: hidden;
 }
+
+h1 {
+    padding-left: 30px;
+}
+
 
 .calculator-grid {
     display: grid;

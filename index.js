@@ -21,8 +21,7 @@ class Calculator {
     }
 
     delete() {
-
-
+        this.curOperand = this.curOperand.toString().slice(0,-1)
     }
 
     showNumber(number) {
@@ -68,7 +67,11 @@ class Calculator {
 
     updateDisplay() {
         this.curOperandText.innerText = this.curOperand
-        this.prevOperandText.innerText = this.prevOperand
+        if (this.operation != null){
+            this.prevOperandText.innerText = `${this.prevOperand} ${this.operation}`
+        } else {
+            this.prevOperandText.innerText = this.prevOperand
+        }
     }
 }
 
@@ -95,5 +98,10 @@ equalsButton.addEventListener('click', button => {
 
 clearButton.addEventListener('click', button => {
     calculator.clear()
+    calculator.updateDisplay()
+})
+
+deleteButton.addEventListener('click', button => {
+    calculator.delete()
     calculator.updateDisplay()
 })
