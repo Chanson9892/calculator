@@ -26,21 +26,49 @@ class Calculator {
     }
 
     showNumber(number) {
-        if (number === '.' && this.curOperand.includes('.')) return
+        if (number === '.' && this.curOperand.includes('.')) return // if there is decimal already, do nothing
         this.curOperand = this.curOperand.toString() + number.toString()
-
     }
 
     chooseOperation(operation) {
-        
+        if (this.curOperand === '') return //if there is no current operand, do nothing
+        if (this.prevOperand !== '') {
+            this.compute()
+        }
+        this.operation = operation
+        this.prevOperand = this.curOperand
+        this.curOperand = ''
     }
 
     compute() {
-
+        let computation 
+        const prev = parseFloat(this.prevOperand)
+        const current = parseFloat(this.curOperand)
+        if (isNaN(prev) || isNaN(current)) return // if prev or current or not numbers, do nothing
+        switch (this.operation){
+            case '+':
+                computation = prev + current
+                break
+            case '-':
+                computation = prev - current
+            break
+            case '/':
+                computation = prev / current
+                break
+            case '*':
+                computation = prev * current
+            break
+            default:
+                return
+        }
+        this.curOperand = computation
+        this.operation = undefined
+        this.prevOperand = ''
     }
 
     updateDisplay() {
         this.curOperandText.innerText = this.curOperand
+        this.prevOperandText.innerText = this.prevOperand
     }
 }
 
@@ -58,4 +86,14 @@ operationButtons.forEach(button => {
         calculator.chooseOperation(button.innerText)
         calculator.updateDisplay()
     })
+})
+
+equalsButton.addEventListener('click', button => {
+    calculator.compute()
+    calculator.updateDisplay()
+})
+
+clearButton.addEventListener('click', button => {
+    calculator.clear()
+    calculator.updateDisplay()
 })
