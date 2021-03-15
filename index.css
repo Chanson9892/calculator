@@ -18,8 +18,8 @@ h1 {
 .links {
     position: absolute;
     padding: .5rem 1rem;
-    top: 120px;
-    right: 100px;
+    top: 50px;
+    right: 50px;
 }
 
 a {
@@ -30,7 +30,7 @@ a {
     display: grid;
     justify-content: center;
     align-content: center;
-    min-height: 100vh;
+    min-height: 80vh;
     grid-template-columns: repeat(4, 100px);
     grid-template-rows: minmax(120px, auto) repeat(5, 100px);
 }
